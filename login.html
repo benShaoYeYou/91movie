@@ -66,7 +66,8 @@
                             </div>
                             <p class="error-message"></p>
                         </div>   <!--请告诉我们你的昵称吧-->
-                        <div  class="register-hidden-gruop"></div>
+<!--                        用户名可以由字母、数字、下划线和中文组成，以中文或字母开头，长度为2-16位-->
+                        <div id="Supplementary-note" class="register-hidden-gruop"></div>
                         <div  class="form-group">
                             <div  class="el-input">
                                 <input type="password" autocomplete="off" id="reg-password" name="reg-password" placeholder="密码（6-16个字符组成，区分大小写）" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
@@ -115,6 +116,7 @@
     var modal = document.getElementById('modal');
     var modal2 = document.getElementById('modal2');
     var regBtn = document.getElementById('reg-button');
+    var regName = document.getElementById('reg-name');
     btn.addEventListener('click', function () {
         ClearAllText("modal");
         modal.style.display = "block";
@@ -139,6 +141,7 @@
         modal2.style.display = "none";
         modal.style.display = "block";
     });
+    // 注册提示
     regBtn.addEventListener('click', function () {
         var name = document.getElementById('reg-name').value;
         var password = document.getElementById('reg-password').value;
@@ -160,6 +163,9 @@
         if(n<6){
             p2.innerText = "密码不能少于6个字符";
         }
+        if(n>16){
+            p2.innerText = "密码不能大于16个字符";
+        }
         if(password!==rePassword){
             p3.innerText = "两次密码不相同";
         }
@@ -170,7 +176,26 @@
             reg();
         }
     });
+    regName.onfocus = function () {
+
+        var name =document.getElementById('reg-name').value;
+        var  usernameRegex = /^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
+        if(!usernameRegex.test(name)){
+            document.getElementById('Supplementary-note').innerHTML = "<p class='Supplementary-note'>用户名由字母、数字、下划线和中文组成，以中文或字母开头，长度为2-16位</p>";
+        }
+        this.style.border='1px solid #00A7DE';
+    };
+    regName.onblur = function () {
+
+        var name = document.getElementById('reg-name').value;
+        var  usernameRegex = /^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
+        if(usernameRegex.test(name)){
+            document.getElementById('Supplementary-note').innerHTML = "";
+        }
+        this.style.border='1px solid #DDDDDD';
+    }
 </script>
+<!--禁用/启用/清空-->
 <script>
     function f() {
         if(document.getElementById("agree").checked===false){
@@ -200,7 +225,7 @@
 <script>
     function login() {
         //用户名：
-        var  usernameRegex = /^\w{3,15}$/;
+        var  usernameRegex = /^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
         //密码：
         var passwordRegex = /^\w{6,16}$/;
         var xmlHttp;
@@ -218,7 +243,7 @@
             xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
         if(!usernameRegex.test(username)){    //验证获得到的值是否符合正则表达式
-            alert("用户名含有非法字符");
+            alert("非法的用户名");
         }
         //校验密码
         else if(!passwordRegex.test(password)){
@@ -241,7 +266,7 @@
 <script>
     function reg() {
         //用户名：
-        var  usernameRegex = /^\w{3,15}$/;
+        var  usernameRegex = /^[a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9_\u4E00-\u9FA5]{1,15}$/;
         //密码：
         var passwordRegex = /^\w{6,16}$/;
         var xmlHttp;
@@ -259,7 +284,7 @@
             xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
         if(!usernameRegex.test(username)){    //验证获得到的值是否符合正则表达式
-            alert("用户名含有非法字符");
+            alert("非法的用户名");
         }
         //校验密码
         else if(!passwordRegex.test(password)){

@@ -46,6 +46,10 @@
     top:12px;
     transform:translate3d(100%, 0px, 0px);
 }
+.Supplementary-note {
+    color:#F45D90;
+    font-size:12px;
+}
 .register-hidden-gruop {
     height:40px;
     margin:0 auto;
