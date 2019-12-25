@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="css/myModel.css" type="text/css">
+    <link rel="stylesheet" href="css/login.css" type="text/css">
+    <link rel="stylesheet" href="css/phone.css" type="text/css">
+</head>
+<body>
+<button class="btn" id="showModel">登录</button>
+<button id="regModal">注册</button>
+<!--登录模态框-->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h4>91电影网</h4>
+            <span class="close">×</span>
+        </header>
+        <div class="modal-body">
+            <div  class="form-login">
+                <div id="geetest-wrap" class="input-box" style="text-align: center">
+                    <ul>
+                        <li class="item username status-box">
+                            <input type="text" value="" placeholder="昵称" id="login-username" maxlength="50" autocomplete="off" class="" onblur="this.style.border='1px solid #DDDDDD'"
+                             onfocus="this.style.border='1px solid #00A7DE'">
+                            <div class="text clearfix"><p></p></div>
+                        </li>
+                        <li class="item password status-box">
+                            <input type="password" placeholder="密码" id="login-password" class="" onblur="this.style.border='1px solid #DDDDDD'"
+                                   onfocus="this.style.border='1px solid #00A7DE'">
+                            <div class="text clearfix">
+                                <p></p>
+                            </div>
+                        </li>
+                        <li class="item gc clearfix"></li>
+                        <li class="remember" style="margin-right: 175px;">
+                            <label><input type="checkbox" >记住我
+                                <span>不是自己的电脑上不要勾选此项</span>
+                            </label>
+                        </li>
+                        <li class="btn-box"><input onclick="login()" type="button" class="btn-login" value="登录">
+                            <input type="button" class="btn-sign" value="注册" id="cancel">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--注册模态框-->
+<div id="modal2" class="modal">
+    <div class="modal-content" style="width: 40%;height: 40%;">
+        <header class="modal-header">
+            <span  style="font-size: 38px;text-align: center">91注册</span>
+            <span class="close">×</span>
+        </header>
+        <div class="modal-body">
+            <div>
+                <div class="register-container">
+                    <form  id="registerForm" method="post" class="report-wrap-module">
+                        <div  class="form-group">
+                            <div  class="el-input">
+                                <input type="text" autocomplete="off" name="reg-name" placeholder="昵称" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                       onfocus="this.style.border='1px solid #00A7DE'"><!---->
+                            </div>
+                            <p class="error-message"></p>
+                        </div>   <!--请告诉我们你的昵称吧-->
+                        <div  class="register-hidden-gruop"></div>
+                        <div  class="form-group">
+                            <div  class="el-input">
+                                <input type="password" autocomplete="off" name="reg-password" placeholder="密码（6-16个字符组成，区分大小写）" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                       onfocus="this.style.border='1px solid #00A7DE'"><!---->
+                            </div>
+                            <p class="error-message"></p>
+                        </div>  <!--密码不能少于6个字符-->
+                        <div  class="register-hidden-gruop"></div>
+                        <div  class="form-group">
+                            <div  class="el-input">
+                                <input type="password" autocomplete="off" name="reg-re-password" placeholder="再次填写您的密码" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                       onfocus="this.style.border='1px solid #00A7DE'"><!---->
+                            </div>
+                            <p class="error-message"></p>
+                        </div>
+                        <div class="form-group">
+                            <label  class="register-agree">
+                                <label  id="check" class="check-box checkbox-bwxr">
+                                    <input id="agree"  name="agree" type="checkbox" class="" onchange="f()">
+                                </label>
+                                我已同意<a  target="_blank" href="">《91电影网用户使用协议》</a>
+                                和<a  target="_blank" href="">《91电影隐私政策》</a>
+                            </label>
+                        </div>
+                        <div  class="form-group">
+                            <button id="reg-button" disabled="disabled" type="button" class="el-button is-disabled btn-full el-button--primary"><!---->
+                                <span>注册</span>
+                            </button>
+                        </div>
+                        <div  id="register_pc_direct_login" class="register-hidden-gruop text-right">
+                            <input type="button" id="toModel" style="background:0 0;border-style:none;color:#00A1D6;" value="已有账号，直接登录&gt;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var btn = document.getElementById('showModel');
+    var btn1 = document.getElementById('regModal');
+    var btn2 = document.getElementById('toModel');
+    var close = document.getElementsByClassName('close')[0];
+    var close2 = document.getElementsByClassName('close')[1];
+    var cancel = document.getElementById('cancel');
+    var modal = document.getElementById('modal');
+    var modal2 = document.getElementById('modal2');
+    btn.addEventListener('click', function () {
+        modal.style.display = "block";
+    });
+    cancel.addEventListener('click', function () {
+        modal.style.display = "none";
+        modal2.style.display = "block";
+    });
+    close.addEventListener('click', function () {
+        modal.style.display = "none";
+    });
+    close2.addEventListener('click', function () {
+        modal2.style.display = "none";
+    });
+    btn1.addEventListener('click',function () {
+        modal2.style.display = "block";
+    });
+    btn2.addEventListener('click', function () {
+        modal2.style.display = "none";
+        modal.style.display = "block";
+    });
+
+</script>
+<script>
+    function f() {
+        if(document.getElementById("agree").checked===false){
+            document.getElementById('reg-button').setAttribute("disabled","disabled");
+            document.getElementById('reg-button').className = "el-button is-disabled btn-full el-button--primary";
+            document.getElementById('check').className = "check-box checkbox-bwxr";
+        }else {
+            document.getElementById('reg-button').removeAttribute("disabled");
+            document.getElementById('reg-button').className = "el-button is-enable btn-full el-button--primary";
+            document.getElementById('check').className = "check-box checkbox-bwxr active";
+        }
+    }
+
+</script>
+<!--登录-->
+<script>
+    function login() {
+        //用户名：
+        var  usernameRegex = /^\w{3,15}$/;
+        //密码：
+        var passwordRegex = /^\w{6,16}$/;
+        var xmlHttp;
+        var username = document.getElementById('login-username').value;
+        var password = document.getElementById('login-password').value;
+        var str = "";
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlHttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if(!usernameRegex.test(username)){    //验证获得到的值是否符合正则表达式
+            alert("用户名含有非法字符");
+        }
+        //校验密码
+        else if(!passwordRegex.test(password)){
+            alert("密码格式不正确");
+        }else {
+            str = "username=" + username + "&password=" + password;
+            xmlHttp.open("post","");   //请求服务器地址
+            xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            xmlHttp.send(str);
+            xmlHttp.onreadystatechange=function()
+            {
+                if (xmlHttp.readyState===4 && xmlHttp.status===200) {
+                    var data = xmlHttp.responseText; //服务器返回数据
+                }
+            };
+        }
+    }
+</script>
+<!--注册-->
+<script>
+    function reg() {
+        //用户名：
+        var  usernameRegex = /^\w{3,15}$/;
+        //密码：
+        var passwordRegex = /^\w{6,16}$/;
+        var xmlHttp;
+        var username = document.getElementById('reg-name').value;
+        var password = document.getElementById('reg-password').value;
+        var rePassword = document.getElementById('reg-re-password').value;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlHttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if(!usernameRegex.test(username)){    //验证获得到的值是否符合正则表达式
+            alert("用户名含有非法字符");
+        }
+        //校验密码
+        else if(!passwordRegex.test(password)){
+            alert("密码格式不正确");
+        }
+        //确认密码
+        else if(password!==rePassword){
+            alert("两次密码不相等");
+        }else if(!passwordRegex.test(rePassword)){
+            alert("密码格式不正确");
+        }else {
+        var str = "";
+        str = "username=" + username + "&password=" + password;
+        xmlHttp.open("post","");   //请求服务器地址
+        xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xmlHttp.send(str);
+        xmlHttp.onreadystatechange=function()
+        {
+            if (xmlHttp.readyState===4 && xmlHttp.status===200)
+            {
+                var data = xmlHttp.responseText; //服务器返回数据
+            }
+        };
+        }
+    }
+</script>
+</body>
+</html>
