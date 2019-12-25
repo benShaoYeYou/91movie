@@ -61,7 +61,7 @@
                     <form  id="registerForm" method="post" class="report-wrap-module">
                         <div  class="form-group">
                             <div  class="el-input">
-                                <input type="text" autocomplete="off" name="reg-name" placeholder="昵称" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                <input type="text" autocomplete="off" id="reg-name" name="reg-name" placeholder="昵称" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
                                        onfocus="this.style.border='1px solid #00A7DE'"><!---->
                             </div>
                             <p class="error-message"></p>
@@ -69,7 +69,7 @@
                         <div  class="register-hidden-gruop"></div>
                         <div  class="form-group">
                             <div  class="el-input">
-                                <input type="password" autocomplete="off" name="reg-password" placeholder="密码（6-16个字符组成，区分大小写）" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                <input type="password" autocomplete="off" id="reg-password" name="reg-password" placeholder="密码（6-16个字符组成，区分大小写）" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
                                        onfocus="this.style.border='1px solid #00A7DE'"><!---->
                             </div>
                             <p class="error-message"></p>
@@ -77,7 +77,7 @@
                         <div  class="register-hidden-gruop"></div>
                         <div  class="form-group">
                             <div  class="el-input">
-                                <input type="password" autocomplete="off" name="reg-re-password" placeholder="再次填写您的密码" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
+                                <input type="password" autocomplete="off" id="reg-re-password" name="reg-re-password" placeholder="再次填写您的密码" class="el-input__inner" onblur="this.style.border='1px solid #DDDDDD'"
                                        onfocus="this.style.border='1px solid #00A7DE'"><!---->
                             </div>
                             <p class="error-message"></p>
@@ -114,6 +114,7 @@
     var cancel = document.getElementById('cancel');
     var modal = document.getElementById('modal');
     var modal2 = document.getElementById('modal2');
+    var regBtn = document.getElementById('reg-button');
     btn.addEventListener('click', function () {
         modal.style.display = "block";
     });
@@ -134,7 +135,37 @@
         modal2.style.display = "none";
         modal.style.display = "block";
     });
-
+    regBtn.addEventListener('click', function () {
+        var name = document.getElementById('reg-name').value;
+        var password = document.getElementById('reg-password').value;
+        var rePassword = document.getElementById('reg-re-password').value;
+        var p1 = document.getElementsByClassName('error-message')[0];
+        var p2 = document.getElementsByClassName('error-message')[1];
+        var p3 = document.getElementsByClassName('error-message')[2];
+        if(name===null||name===""){
+            p1.innerText = "请告诉我们你的昵称吧";
+        }
+        var l = password.length;
+        var n = 0;
+        for(var i=0; i<l; i++) {
+            if ((password.charCodeAt(i) & 0xff00) !== 0) {
+                n ++;
+            }
+            n ++;
+        }
+        if(n<6){
+            p2.innerText = "密码不能少于6个字符";
+        }
+        if(password!==rePassword){
+            p3.innerText = "两次密码不相同";
+        }
+        if(name!==null&&n>=6&&password===rePassword){
+            p1.innerText = "";
+            p2.innerText = "";
+            p3.innerText = "";
+            reg();
+        }
+    });
 </script>
 <script>
     function f() {
