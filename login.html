@@ -116,9 +116,11 @@
     var modal2 = document.getElementById('modal2');
     var regBtn = document.getElementById('reg-button');
     btn.addEventListener('click', function () {
+        ClearAllText("modal");
         modal.style.display = "block";
     });
     cancel.addEventListener('click', function () {
+        ClearAllText("modal2");
         modal.style.display = "none";
         modal2.style.display = "block";
     });
@@ -129,9 +131,11 @@
         modal2.style.display = "none";
     });
     btn1.addEventListener('click',function () {
+        ClearAllText("modal2");
         modal2.style.display = "block";
     });
     btn2.addEventListener('click', function () {
+        ClearAllText("modal");
         modal2.style.display = "none";
         modal.style.display = "block";
     });
@@ -179,7 +183,18 @@
             document.getElementById('check').className = "check-box checkbox-bwxr active";
         }
     }
-
+    function ClearAllText(divInput) {
+        var txts = document.getElementById(divInput).getElementsByTagName("input");
+        for (var i = 0; i < txts.length; i++) {
+            if (txts[i].type === "text"||txts[i].type === "password") {
+                txts[i].value = "";  //text 清空
+            }
+            if (txts[i].type === "checkbox"){
+                txts[i].checked = false;
+                f();
+            }
+        }
+    }
 </script>
 <!--登录-->
 <script>
