@@ -39,24 +39,21 @@
             <!--                登陆注册-->
             <div class="header-side" style="margin-right: 250px;">
                 <div>
-                    <a id="showModel" class="header-sideItemCon">
+                    <a style="display: block;" id="showModel" class="header-sideItemCon">
                         <span>登陆</span>
                     </a>
+                    <input  style="display: none;cursor: pointer;background:#232325;border-style:none;text-align:center;font-family:'Helvetica Neue', 'Helvetica', 'PingFang SC', '微软雅黑', 'Tahoma', 'Arial', sans-serif;
+                font-size:30px;width: 50%;height: auto;color: #ffffff" type="text" id="user"  readonly="readonly" value="涂会超">
                 </div>
             </div>
             <div class="header-side" style="margin-right: 50px;">
                 <div>
-                    <a id="regModal" class="header-sideItemCon">
+                    <a style="display: block;" id="regModal" class="header-sideItemCon">
                         <span>注册</span>
                     </a>
                 </div>
             </div>
-            <!--                登陆成功后-->
-            <!--                <div class="header-side" style="margin-right: 250px;">-->
-            <!--                    <div style="color: #00be06">-->
-            <!--                        尊敬的SVIP：<strong style="color: #ff615f">涂先生</strong>，欢迎回来！-->
-            <!--                    </div>-->
-            <!--                </div>-->
+
         </div>
     </div>
 </header>
@@ -223,6 +220,7 @@
     var modal2 = document.getElementById('modal2');
     var regBtn = document.getElementById('reg-button');
     var regName = document.getElementById('reg-name');
+    var user = document.getElementById('user');
     btn.addEventListener('click', function () {
         ClearAllText("modal");
         modal.style.display = "block";
@@ -246,6 +244,11 @@
         ClearAllText("modal");
         modal2.style.display = "none";
         modal.style.display = "block";
+    });
+    user.addEventListener('click', function () {
+        document.getElementById("showModel").style.display = "block";
+        document.getElementById("regModal").style.display = "block";
+        document.getElementById("user").style.display = "none";
     });
     // 注册提示
     regBtn.addEventListener('click', function () {
@@ -363,6 +366,12 @@
             {
                 if (xmlHttp.readyState===4 && xmlHttp.status===200) {
                     var data = xmlHttp.responseText; //服务器返回数据
+                    if(data.username!==null&&data.username!==""){
+                        document.getElementById("showModel").style.display = "none";
+                        document.getElementById("regModal").style.display = "none";
+                        document.getElementById("user").value = data.username;
+                        document.getElementById("user").style.display = "block";
+                    }else alert("登录失败了哦");
                 }
             };
         }
@@ -412,8 +421,9 @@
                 if (xmlHttp.readyState===4 && xmlHttp.status===200)
                 {
                     var data = xmlHttp.responseText; //服务器返回数据
+                    alert("恭喜你注册成功，91电影网欢迎你的加入");
                 }
-            };
+            }
         }
     }
 </script>
